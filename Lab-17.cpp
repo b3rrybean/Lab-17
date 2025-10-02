@@ -28,9 +28,32 @@ int main() {
     output(head);
         
     // delete node
-    cout <<
+    cout << "Which node to delete?" << endl;
+    output(head);
+    int entry;
+    cout << "Choice --> ";
+    cin >> entry;
+    head = deleteNode(head, entry);
+    output(head);
 
+    // insert node
+    cout << "After which node to insert 10000" << endl;
+    output(head);
+    cin >> entry;
+    head = insertNode(head, entry, 10000);
+    output(head);
 
+    // add to tail
+    head = addToTail(head, 500);
+    cout << "After adding 500 to the tail:" << endl;
+    output(head);
+
+    // delete entire list
+    deleteList(head);
+    output(head);
+
+    return 0;
+}
 
         // adds node at head
         if (!head) { // if this is the first node, it's the new head
@@ -45,14 +68,6 @@ int main() {
         }
     }
     output(head);
-
-    // deleting a node
-    Node * current = head;
-    cout << "Which node to delete? " << endl;
-    output(head);
-    int entry;
-    cout << "Choice --> ";
-    cin >> entry;
 
     // traverse that many times and delete that node
     current = head;
@@ -72,26 +87,6 @@ int main() {
     }
     output(head);
 
-    // insert a node
-    current = head;
-    cout << "After which node to insert 10000? " << endl;
-    count = 1;
-    while (current) {
-        cout << "[" << count++ << "] " << current->value << endl;
-        current = current->next;
-    }
-    cout << "Choice --> ";
-    cin >> entry;
-
-    current = head;
-    prev = head;
-    for (int i = 0; i < (entry); i++)
-        if (i == 0)
-            current = current->next;
-        else {
-            current = current->next;
-            prev = prev->next;
-        }
     //at this point, insert a node between prev and current
     Node * newnode = new Node;
     newnode->value = 10000;
