@@ -85,19 +85,70 @@ Node* addToTail(Node *head, float value) {
 
     if(!head) return newNode;
 
-    
+    Node *current = head;
+    while (current->next) {
+        current = current->next;
+    }
+    current->next = newNode;
+    return head;
 }
 
-    // deleting the linked list
-    void deleteList(Node *&head) {
-        Node *current = head;
-        while (current) {
-            Node *next = current->next;
-            delete current;
-            current = next;
-        }
-        head = nullptr;
+// delete node at position
+Node* deleteNode(Node *head, int position) {
+    if (!head) return nullptr;
+
+    Node *current = head;
+    if (position == 1) { //delete head
+        head = head->next;
+        delete current;
+        return head;
     }
 
-    return 0;
+    Node *prev = head;
+    for (int i = 1; i < position -1 && prev->next, i++) {
+        prev = prev->next;
+    }
+
+    current = prev->next;
+    if (current) {
+        prev->next = current->next;
+        delete current;
+    }
+    return head;
+}
+
+// insert node after given position
+Node* insertNode(Node *head, int position, float value) {
+    Node *newNode = newNode;
+    newNode->value = value;
+
+    if (position == 0) { // insert at front
+        newNode->next = head;
+        return newNode;
+    }
+
+    Node *current = head;
+    for (int i = 1; i < position && current, i++) {
+        current = current>next;
+    }
+
+    if (!current) { // position too large
+        delete newNode;
+        return head;
+    }
+
+    newNode->next = current->next;
+    current->next = newNode;
+    return head;
+}
+
+// deleting the linked list
+void deleteList(Node *&head) {
+    Node *current = head;
+    while (current) {
+        Node *next = current->next;
+        delete current;
+        current = next;
+    }
+    head = nullptr;
 }
