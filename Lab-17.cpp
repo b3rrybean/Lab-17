@@ -8,7 +8,13 @@ struct Node {
     Node *next;
 };
 
-void output(Node *);
+// Function prototypes
+void output(Node *head);
+Node* addtoFront(Node *head, float value);
+Node* addToTail(Node *head, float value);
+Node* deleteNode(Node *head, int position);
+Node* insertNode(Node *head, int position, float value);
+void deleteList(Node *&head);
 
 int main() {
     Node *head = nullptr;
@@ -17,8 +23,15 @@ int main() {
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
-        Node *newVal = new Node;
+        head = addToFront(head, tmp_val);
+    }
+    output(head);
         
+    // delete node
+    cout <<
+
+
+
         // adds node at head
         if (!head) { // if this is the first node, it's the new head
             head = newVal;
@@ -87,14 +100,15 @@ int main() {
     output(head);
 
     // deleting the linked list
-    current = head;
-    while (current) {
-        head = current->next;
-        delete current;
-        current = head;
+    void deleteList(Node *&head) {
+        Node *current = head;
+        while (current) {
+            Node *next = current->next;
+            delete current;
+            current = next;
+        }
+        head = nullptr;
     }
-    head = nullptr;
-    output(head);
 
     return 0;
 }
