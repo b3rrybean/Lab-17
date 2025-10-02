@@ -55,44 +55,38 @@ int main() {
     return 0;
 }
 
-        // adds node at head
-        if (!head) { // if this is the first node, it's the new head
-            head = newVal;
-            newVal->next = nullptr;
-            newVal->value = tmp_val;
-        }
-        else { // its a second or subsequent node; place at the head
-            newVal->next = head;
-            newVal->value = tmp_val;
-            head = newVal;
-        }
+void output(Node * head) {
+    if (!head) {
+        cout << "Empty list.\n";
+        return;
     }
-    output(head);
-
-    // traverse that many times and delete that node
-    current = head;
-    Node *prev = head;
-    for (int i = 0; i < (entry-1); i++)
-        if (i == 0)
-            current = current->next;
-        else {
-            current = current->next;
-            prev = prev->next;
-        }
-    // at this point, delete current and reroute pointers
-    if (current) {  // checks for current to be valid before deleting the node
-        prev->next = current->next;
-        delete current;
-        current = nullptr;
+    int count = 1;
+    Node * current = head;
+    while (current) {
+        cout << "[" << count++ << "] " << current->value << endl;
+        current = current->next;
     }
-    output(head);
+    cout << endl;
+}
 
-    //at this point, insert a node between prev and current
-    Node * newnode = new Node;
-    newnode->value = 10000;
-    newnode->next = current;
-    prev->next = newnode;
-    output(head);
+// adds node at head
+Node* addToFront(Node *head, float value) {
+    Node *newNode = new Node;
+    newNode->value = value;
+    newNode->next = head;
+    return newNode; // new head
+}
+
+// add node to tail
+Node* addToTail(Node *head, float value) {
+    Node *newNode = new Node;
+    newNode->value = value;
+    newNode->next = nullptr;
+
+    if(!head) return newNode;
+
+    
+}
 
     // deleting the linked list
     void deleteList(Node *&head) {
@@ -106,18 +100,4 @@ int main() {
     }
 
     return 0;
-}
-
-void output(Node * hd) {
-    if (!hd) {
-        cout << "Empty list.\n";
-        return;
-    }
-    int count = 1;
-    Node * current = hd;
-    while (current) {
-        cout << "[" << count++ << "] " << current->value << endl;
-        current = current->next;
-    }
-    cout << endl;
 }
