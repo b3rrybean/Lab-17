@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 const int SIZE = 7;  
@@ -10,7 +12,7 @@ struct Node {
 
 // Function prototypes
 void output(Node *head);
-Node* addtoFront(Node *head, float value);
+Node* addToFront(Node *head, float value);
 Node* addToTail(Node *head, float value);
 Node* deleteNode(Node *head, int position);
 Node* insertNode(Node *head, int position, float value);
@@ -18,7 +20,7 @@ void deleteList(Node *&head);
 
 int main() {
     Node *head = nullptr;
-    int count = 0;
+    srand(time(0));
 
     // create a linked list of size SIZE with random numbers 0-99
     for (int i = 0; i < SIZE; i++) {
@@ -105,7 +107,7 @@ Node* deleteNode(Node *head, int position) {
     }
 
     Node *prev = head;
-    for (int i = 1; i < position -1 && prev->next, i++) {
+    for (int i = 1; i < position -1 && prev->next; i++) {
         prev = prev->next;
     }
 
@@ -119,8 +121,21 @@ Node* deleteNode(Node *head, int position) {
 
 // insert node after given position
 Node* insertNode(Node *head, int position, float value) {
-    Node *newNode = newNode;
+    Node* newNode = new Node;
     newNode->value = value;
+
+    int length = 0;
+    Node *temp = head;
+    while (temp) {
+        length++;
+        temp = temp->next;
+    }
+
+    if (position < 0 || position > length) {
+        cout << "Invalid position!\n";
+        delete newNode;
+        return head;
+    }
 
     if (position == 0) { // insert at front
         newNode->next = head;
@@ -128,13 +143,8 @@ Node* insertNode(Node *head, int position, float value) {
     }
 
     Node *current = head;
-    for (int i = 1; i < position && current, i++) {
-        current = current>next;
-    }
-
-    if (!current) { // position too large
-        delete newNode;
-        return head;
+    for (int i = 1; i < position && current; i++) {
+        current = current->next;
     }
 
     newNode->next = current->next;
